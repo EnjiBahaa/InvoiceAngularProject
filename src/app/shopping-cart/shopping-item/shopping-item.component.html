@@ -1,0 +1,74 @@
+<section class="product-container mt-3 shadow-sm p-3 mb-5 bg-white rounded">
+  <div class="container">
+    <div class="row row-eq-height">
+      <div class="col-md-6">
+        <div class="details">
+          <h3>
+            <a href="#">{{ shoppingItem.name | uppercase }}</a>
+          </h3>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ shoppingItem.productNo }}
+          </h6>
+          <p class="card-text">{{ shoppingItem.description }}</p>
+          <div
+            *ngIf="shoppingItem.count > 0; then thenCount; else elseCart"
+          ></div>
+          <ng-template #elseCart>
+            <button
+              (click)="incCount()"
+              class="btn btn-primary form-control mt-2"
+            >
+              Add to Cart
+            </button>
+          </ng-template>
+          <ng-template #thenCount>
+            <div class="input-group mb-3 small">
+              <button
+                (click)="incCount()"
+                [ngClass]="
+                  checkResult ? 'btn btn-primary' : 'btn btn-primary disabled'
+                "
+              >
+                <i class="fa fa-plus"></i>
+                <!-- class="btn btn-primary"> -->
+              </button>
+              <input
+                readonly
+                class="text-center"
+                value="{{ shoppingItem.count }}"
+              />
+              <button (click)="decCount()" class="btn btn-primary">
+                <i class="fa fa-minus"></i>
+              </button>
+            </div>
+            <span
+              [ngStyle]="{
+                visibility:
+                  shoppingItem.count >= shoppingItem.availableQuantity
+                    ? 'visible'
+                    : 'hidden'
+              }"
+              style="color: red; font-size: smaller;"
+            >
+              *The Item Count entered exceeds the Available Quantity.
+            </span>
+          </ng-template>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2 class="text-center">
+          {{ shoppingItem.unitPrice | currency: "EGP":true:"2.0-2" }}
+        </h2>
+      </div>
+      <div class="col-md-2">
+        <button
+          class="btn btn-danger"
+          id="{{ shoppingItem.id }}"
+          (click)="delete()"
+        >
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<!-- <app-nav-bar [products]="products"></app-nav-bar> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <ul class="list-group m-3">
+        <button (click)="changeIndex(0)" class="list-group-item">Home</button>
+        <button (click)="changeIndex(1)" class="list-group-item">
+          Products
+        </button>
+        <button (click)="changeIndex(2)" class="list-group-item">
+          Shopping Cart List
+        </button>
+      </ul>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div *ngIf="pageIndex == 0"></div>
+
+        <div *ngIf="pageIndex == 1">
+          <app-products [products]="products"></app-products>
+        </div>
+
+        <div *ngIf="pageIndex == 2">
+          <app-shopping-cart [shoppingCart]="shoppingCart"></app-shopping-cart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

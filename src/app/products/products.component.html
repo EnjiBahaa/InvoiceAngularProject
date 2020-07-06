@@ -1,0 +1,23 @@
+<div class="mt3 d-flex flex-wrap">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search.."
+    [(ngModel)]="search"
+  />
+
+  <div *ngIf="showContent; then thenProducts; else elseLoading"></div>
+  <ng-template #elseLoading>
+    <div style="font-size: xx-large;" class="mt-2">
+      Products are Loading...
+    </div>
+  </ng-template>
+
+  <ng-template #thenProducts>
+    <app-product
+      class="p-2"
+      *ngFor="let product of products | filter: search; let i = index"
+      [product]="product"
+    ></app-product>
+  </ng-template>
+</div>

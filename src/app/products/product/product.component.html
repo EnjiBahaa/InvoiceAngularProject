@@ -1,0 +1,33 @@
+<div class="card-rows">
+  <div class="card" style="width: 16rem;">
+    <div class="card-body">
+      <h3 class="card-title">{{ product.name }}</h3>
+      <h5>
+        {{ product.unitPrice | currency: "EGP" }}
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ product.productNo }}</h6>
+      <p class="card-text">{{ product.description }}</p>
+      <div *ngIf="product.count > 0; then thenCount; else elseCart"></div>
+      <ng-template #elseCart>
+        <button (click)="incCount()" class="btn btn-primary form-control mt-2">
+          Add to Cart
+        </button>
+      </ng-template>
+      <ng-template #thenCount>
+        <div class="input-group mb-3">
+          <button (click)="incCount()" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+          </button>
+          <input
+            readonly
+            class="text-center small col"
+            value="{{ product.count }}"
+          />
+          <button (click)="decCount()" class="btn btn-primary">
+            <i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
